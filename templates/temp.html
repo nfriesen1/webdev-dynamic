@@ -3,9 +3,42 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>TEMP</title>
+	<title>State Yearly Temperatures</title>
+	<link rel="stylesheet" href="/css/style.css" />
+	<link rel="stylesheet" href="/css/foundation.css" />
 </head>
-<body>
-	<h1>$$FIPS$$</h1>
+<body style="background-color: aliceblue;">
+	<div class="top-bar">
+		<div class="top-bar-left">
+		  <ul class="dropdown menu" data-dropdown-menu>
+			<li class="menu-text">State Temperatures</li>
+			<li>
+			  <a href="index.html">Home</a>
+			</li>
+			<li><a href="/fips.html">States</a></li>
+			<li><a href="">Years</a></li>
+			<li><a href="">Temps</a></li>
+		  </ul>
+		</div>
+	  </div>
+	<h1>$$FIPS$$ Yearly Temperatures</h1>
+	<table>
+		<thead>
+			<tr>
+				<th>
+					Year
+				</th>
+				<th>
+					Avg. Temp. F
+				</th>
+				<th>
+					Avg. Temp. C
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			$$TABLE_BODY$$
+		</tbody>
+	</table>
 </body>
 </html>

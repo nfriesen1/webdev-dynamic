@@ -42,18 +42,25 @@ app.use(express.static(root));
 app.get('/fips/:standard', (req, res) => {
     let standard = req.params.standard;
     let state = ""
-    console.log(standard)
     let fips_query = "select * from Climate where fips=?"
     state = us.lookup('01')
-    console.log(state)
     let p1 = dbSelect(fips_query, [standard]);
     let p2 = fs.promises.readFile(path.join(template,'temp.html'), 'utf-8')
     Promise.all([p1, p2]).then((results) => {
-        console.log(results[1])
         let response = results[1].replace('$$FIPS$$', us.lookup(results[0][0].fips).name)
+        let table_body = '';
+        results[0].forEach((object) => {
+            let table_row = '<tr>';
+            table_row += '<td>' + object.year + '</td>';
+            table_row += '<td>' + Math.round(object.temp * 100) / 100, + '</td>';
+            table_row += '<td>' + Math.round(object.tempc * 100) / 100 + '</td>';
+            table_body += table_row;
+            });
+        response = response.replace('$$TABLE_BODY$$', table_body)
         res.status(200).type('html').send(response)
         }).catch((error) => {
-            res.status(404).type('text').send("File not found")
+            console.error('Error: ' , error)
+            res.status(404).type('text').send(error)
         })
     })
    
