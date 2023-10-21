@@ -23,13 +23,17 @@
     </div>
 
     <div>
-        <ul id="year_list">
-
-        </ul>
+        <form id="tempForm" action="/temp/">
+          <label for="temp1">Temp 1:</label><br>
+          <input type="text" id="temp1" name="temp1" value="50"><br>
+          <label for="temp2">Temp 2:</label><br>
+          <input type="text" id="temp2" name="temp2" value="55"><br><br>
+          <input type="submit" value="Submit">
+        </form>
     </div>
 
     <!-- include before closing <body> tag -->
-    <script src="js/vendor/year_script.js"></script>
+    <script src="js/vendor/temp_script.js"></script>
     <script src="js/vendor/jquery.js"></script>
     <script src="js/vendor/what-input.js"></script>
     <script src="js/vendor/foundation.js"></script>

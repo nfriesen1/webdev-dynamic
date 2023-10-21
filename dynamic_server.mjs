@@ -90,7 +90,7 @@ app.get('/year/:year', (req,res) => {
 app.get('/temp/:temp1/:temp2', (req,res) => {
     let temp1 = req.params.temp1;
     let temp2 = req.params.temp2
-    let temp_query = "select * from Climate where temp =>? OR temp <=?"
+    let temp_query = "select * from Climate where temp >=? OR temp <=?"
     let p1 = dbSelect(temp_query, [temp1, temp2]);
     let p2 = fs.promises.readFile(path.join(template,'temp_template.html'), 'utf-8')
     Promise.all([p1, p2]).then((results) => {
@@ -99,8 +99,11 @@ app.get('/temp/:temp1/:temp2', (req,res) => {
         let table_body = '';
         results[0].forEach((object) => {
             let table_row = '<tr>';
-            table_row += '<td>' + us.lookup(object.fips).name + '</td>';
-            table_row += '<td>' + Math.round(object.temp * 100) / 100, + '</td>';
+            if(object.temp >= temp1 && object.temp <= temp2) {
+                table_row += '<td>' + object.year + '</td>';
+                table_row += '<td>' + us.lookup(object.fips).name + '</td>';
+            }
+            
             table_body += table_row;
             });
         response = response.replace('$$TABLE_BODY$$', table_body)
