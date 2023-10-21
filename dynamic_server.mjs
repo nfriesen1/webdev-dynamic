@@ -45,7 +45,7 @@ app.get('/fips/:standard', (req, res) => {
     let fips_query = "select * from Climate where fips=?"
     state = us.lookup('01')
     let p1 = dbSelect(fips_query, [standard]);
-    let p2 = fs.promises.readFile(path.join(template,'temp.html'), 'utf-8')
+    let p2 = fs.promises.readFile(path.join(template,'state_template.html'), 'utf-8')
     Promise.all([p1, p2]).then((results) => {
         let response = results[1].replace('$$FIPS$$', us.lookup(results[0][0].fips).name)
         let table_body = '';
@@ -63,6 +63,29 @@ app.get('/fips/:standard', (req, res) => {
             res.status(404).type('text').send(error)
         })
     })
+
+app.get('/year/:year', (req,res) => {
+    let year = req.params.year;
+    let year_query = "select * from Climate where year=?"
+    let p1 = dbSelect(year_query, [year]);
+    let p2 = fs.promises.readFile(path.join(template,'year_template.html'), 'utf-8')
+    Promise.all([p1, p2]).then((results) => {
+        let response = results[1].replace('$$YEAR$$', results[0][0].year)
+        let table_body = '';
+        results[0].forEach((object) => {
+            let table_row = '<tr>';
+            table_row += '<td>' + us.lookup(object.fips).name + '</td>';
+            table_row += '<td>' + Math.round(object.temp * 100) / 100, + '</td>';
+            table_row += '<td>' + Math.round(object.tempc * 100) / 100 + '</td>';
+            table_body += table_row;
+            });
+        response = response.replace('$$TABLE_BODY$$', table_body)
+        res.status(200).type('html').send(response)
+        }).catch((error) => {
+            console.error('Error: ' , error)
+            res.status(404).type('text').send(error)
+        })
+})
    
 
 app.listen(port, () => {

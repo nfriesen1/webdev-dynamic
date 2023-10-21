@@ -1,3 +1,5 @@
+const state_list = document.getElementById("state_list")
+
 const states = [
     { fips: '01', state: 'ALABAMA' },
     { fips: '04', state: 'ARIZONA' },
@@ -49,11 +51,11 @@ const states = [
     { fips: '55', state: 'WISCONSIN' },
     { fips: '56', state: 'WYOMING' }
 ];
-        const temp = document.getElementById("state_list")
-        let text = "";
 
-        states.forEach((state) => {
-            text+=`<li><a href="/fips/${state.fips}">${state.state}</a></li>`
-        })
+let text = "";
 
-        temp.innerHTML += text;
+states.forEach((state) => {
+    text+=`<li><a href="/fips/${state.fips}">${state.state}</a></li>`
+})
+
+state_list.innerHTML += text;
