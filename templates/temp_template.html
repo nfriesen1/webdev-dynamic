@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>State Yearly Temperatures</title>
+	<link rel="stylesheet" href="/css/style.css" />
+	<link rel="stylesheet" href="/css/foundation.css" />
+</head>
+<body style="background-color: aliceblue;">
+	<div class="top-bar">
+		<div class="top-bar-left">
+		  <ul class="dropdown menu" data-dropdown-menu>
+			<li class="menu-text">State Temperatures By Year</li>
+			<li>
+			  <a href="../../index.html">Home</a>
+			</li>
+			<li><a href="/fips.html">States</a></li>
+			<li><a href="/years.html">Years</a></li>
+			<li><a href="/temp.html">Temps</a></li>
+		  </ul>
+		</div>
+	  </div>
+	<h1>Years and States with temperatures between $$TEMP1$$°F and $$TEMP2$$°F
+    </h1>
+	<table>
+		<thead>
+			<tr>
+				<th>
+					State
+				</th>
+				<th>
+					Year
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			$$TABLE_BODY$$
+		</tbody>
+	</table>
+</body>
+</html>
