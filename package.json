@@ -3,11 +3,11 @@
     "description": "Dynamic Server",
     "version": "1.0.0",
     "author": {
-        "name": "",
-        "email": ""
+        "name": "Noah Friesen",
+        "email": "frie1379@stthomas.edu"
     },
-    "contributors": [],
-    "repository": {},
+    "contributors": ["Noah Friesen", "Charles Nix"],
+    "repository": "https://github.com/nfriesen1/webdev-dynamic",
     "dependencies": {
         "express": "^4.18.2",
         "sqlite3": "^5.1.6",

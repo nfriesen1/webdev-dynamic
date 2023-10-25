@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>State Temperatures Throughout the Years</title>
     <link rel="stylesheet" href="css/foundation.css" />
+    <link rel="stylesheet" href="css/style.css" />
   </head>
 
   <body style="background-color: aliceblue;">
@@ -22,11 +23,14 @@
       </div>
     </div>
 
-    <div>
+    <h1>Temperatures</h1>
+    <p>Use the inputs below to find the year and state where their average temp lies between the range of the two temps</p>
+
+    <div class="temp_form">
         <form id="tempForm" action="/temp/">
-          <label for="temp1">Temp 1:</label><br>
+          <label for="temp1">Min:</label><br>
           <input type="text" id="temp1" name="temp1" value="50"><br>
-          <label for="temp2">Temp 2:</label><br>
+          <label for="temp2">Max:</label><br>
           <input type="text" id="temp2" name="temp2" value="55"><br><br>
           <input type="submit" value="Submit">
         </form>
