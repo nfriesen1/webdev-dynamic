@@ -6,10 +6,15 @@
         "name": "Noah Friesen",
         "email": "frie1379@stthomas.edu"
     },
-    "contributors": ["Noah Friesen", "Charles Nix"],
+    "contributors": [
+        "Noah Friesen",
+        "Charles Nix"
+    ],
     "repository": "https://github.com/nfriesen1/webdev-dynamic",
     "dependencies": {
         "express": "^4.18.2",
+        "plotly.js-dist": "^2.27.0",
+        "puppeteer": "^21.4.1",
         "sqlite3": "^5.1.6",
         "us": "^2.0.0"
     }
