@@ -5,10 +5,10 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>State Yearly Temperatures</title>
+
 	<link rel="stylesheet" href="/css/style.css" />
 	<link rel="stylesheet" href="/css/foundation.css" />
-	<script>
-
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 	</script>
 </head>
 
@@ -27,6 +27,7 @@
 		</div>
 	</div>
 	<h1>$$FIPS$$ Yearly Temperatures</h1>
+	<canvas id="myChart" style="width:100%;max-width:700px; margin: auto;"></canvas>
 	<table>
 		<thead>
 			<tr>
@@ -45,6 +46,38 @@
 			$$TABLE_BODY$$
 		</tbody>
 	</table>
+
+	<script>
+		let data = [$$DATA$$]
+		let minTemp = data[0].y
+		let maxTemp = data[0].y
+		data.forEach(object => {
+			if(object.y >= maxTemp) {
+				maxTemp = object.y
+			} else {
+				minTemp = object.y
+			}
+		});
+		console.log(minTemp)
+		console.log(maxTemp)
+		new Chart("myChart", {
+			type: "scatter",
+			data: {
+				datasets: [{
+					pointRadius: 4,
+					pointBackgroundColor: "#FA8072",
+					data: data
+				}]
+			},
+			options: {
+				legend: { display: false },
+				scales: {
+					xAxes: [{ ticks: { min: 1880, max: 2020 } }],
+					yAxes: [{ ticks: { min: Math.round(minTemp), max: Math.round(maxTemp)+1	} }],
+				}
+			}
+		});
+	</script>
 </body>
 
 </html>

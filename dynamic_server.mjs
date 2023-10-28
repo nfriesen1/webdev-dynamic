@@ -49,14 +49,20 @@ app.get('/fips/:standard', (req, res) => {
     Promise.all([p1, p2]).then((results) => {
         let response = results[1].replace('$$FIPS$$', us.lookup(results[0][0].fips).name)
         let table_body = '';
+        let chartValues = [];
         results[0].forEach((object) => {
             let table_row = '<tr>';
             table_row += '<td>' + object.year + '</td>';
-            table_row += '<td>' + Math.round(object.temp * 100) / 100, + '</td>';
+            table_row += '<td>' + Math.round(object.temp * 100) / 100 + '</td>';
             table_row += '<td>' + Math.round(object.tempc * 100) / 100 + '</td>';
             table_body += table_row;
             });
+            results[0].forEach((object) => {
+                    chartValues.push('{"x": ' + object.year + ', "y": ' + Math.round(object.temp * 100) / 100 + '}')
+            });
+        response = response.replace('$$DATA$$', chartValues)
         response = response.replace('$$TABLE_BODY$$', table_body)
+        //console.log(response)
         res.status(200).type('html').send(response)
         }).catch((error) => {
             console.error('Error: ' , error)
