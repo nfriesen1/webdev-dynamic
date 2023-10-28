@@ -58,4 +58,6 @@ states.forEach((state) => {
     text+=`<li><a href="/fips/${state.fips}">${state.state}</a></li>`
 })
 
+text+=`<li><a href="/fips/${states[states.length-3].fips}">${prev}</a></li>`
+
 state_list.innerHTML += text;
