@@ -41,9 +41,7 @@ app.use(express.static(root));
 
 app.get('/fips/:standard', (req, res) => {
     let standard = req.params.standard;
-    let state = ""
     let fips_query = "select * from Climate where fips=?"
-    state = us.lookup('01')
     let p1 = dbSelect(fips_query, [standard]);
     let p2 = fs.promises.readFile(path.join(template,'state_template.html'), 'utf-8')
     Promise.all([p1, p2]).then((results) => {
@@ -66,7 +64,7 @@ app.get('/fips/:standard', (req, res) => {
         res.status(200).type('html').send(response)
         }).catch((error) => {
             console.error('Error: ' , error)
-            res.status(404).type('text').send(error)
+            res.status(404).type('text').send("Error: No data for fips number " + standard)
         })
     })
 
@@ -89,7 +87,7 @@ app.get('/year/:year', (req,res) => {
         res.status(200).type('html').send(response)
         }).catch((error) => {
             console.error('Error: ' , error)
-            res.status(404).type('text').send(error)
+            res.status(404).type('text').send("Error: No data for year " + year)
         })
 })
 
@@ -116,7 +114,7 @@ app.get('/temp/:temp1/:temp2', (req,res) => {
         res.status(200).type('html').send(response)
         }).catch((error) => {
             console.error('Error: ' , error)
-            res.status(404).type('text').send(error)
+            res.status(404).type('text').send("Error: No data for temperature between " + temp1 + " " + temp2)
         })
 })
 
