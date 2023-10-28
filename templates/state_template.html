@@ -18,7 +18,7 @@
 			<ul class="dropdown menu" data-dropdown-menu>
 				<li class="menu_text">
 					<a href="../index.html" style="color: black; font-weight: bold;">State Temperatures</a>
-				  </li>
+				</li>
 				<li>
 					<a href="../../index.html">Home</a>
 				</li>
@@ -29,8 +29,14 @@
 		</div>
 	</div>
 	<h1>$$FIPS$$ Yearly Temperatures</h1>
+	<div class="state-container">
+		<div class="btn-container">
+			<button id="prev" onclick="navigationLinks()">Previous</button>
+			<button id="next" onclick="navigationLinks()">Next</button>
+		</div>
+	</div>
 	<canvas id="myChart" style="width:100%;max-width:700px; margin: auto;"></canvas>
-	<br/>
+	<br />
 	<table>
 		<thead>
 			<tr>
@@ -55,114 +61,95 @@
         </ul>
     </div>-->
 
-	<div class = "state-container">
-		<div class="btn-container">
-			<button id="prev" onclick="navigationLinks()">Previous</button>
-			<button id="next" onclick="navigationLinks()">Next</button>
-		</div>
-	</div>
-
 	<script>
 
-const states = [
-    { fips: '01', state: 'ALABAMA' },
-    { fips: '04', state: 'ARIZONA' },
-    { fips: '05', state: 'ARKANSAS' },
-    { fips: '06', state: 'CALIFORNIA' },
-    { fips: '08', state: 'COLORADO' },
-    { fips: '09', state: 'CONNECTICUT' },
-    { fips: '10', state: 'DELAWARE' },
-    { fips: '12', state: 'FLORIDA' },
-    { fips: '13', state: 'GEORGIA' },
-    { fips: '15', state: 'HAWAII' },
-    { fips: '16', state: 'IDAHO' },
-    { fips: '17', state: 'ILLINOIS' },
-    { fips: '18', state: 'INDIANA' },
-    { fips: '19', state: 'IOWA' },
-    { fips: '20', state: 'KANSAS' },
-    { fips: '21', state: 'KENTUCKY' },
-    { fips: '22', state: 'LOUISIANA' },
-    { fips: '23', state: 'MAINE' },
-    { fips: '24', state: 'MARYLAND' },
-    { fips: '25', state: 'MASSACHUSETTS' },
-    { fips: '26', state: 'MICHIGAN' },
-    { fips: '27', state: 'MINNESOTA' },
-    { fips: '28', state: 'MISSISSIPPI' },
-    { fips: '29', state: 'MISSOURI' },
-    { fips: '30', state: 'MONTANA' },
-    { fips: '31', state: 'NEBRASKA' },
-    { fips: '32', state: 'NEVADA' },
-    { fips: '33', state: 'NEW HAMPSHIRE' },
-    { fips: '34', state: 'NEW JERSEY' },
-    { fips: '35', state: 'NEW MEXICO' },
-    { fips: '36', state: 'NEW YORK' },
-    { fips: '37', state: 'NORTH CAROLINA' },
-    { fips: '38', state: 'NORTH DAKOTA' },
-    { fips: '39', state: 'OHIO' },
-    { fips: '40', state: 'OKLAHOMA' },
-    { fips: '41', state: 'OREGON' },
-    { fips: '42', state: 'PENNSYLVANIA' },
-    { fips: '44', state: 'RHODE ISLAND' },
-    { fips: '45', state: 'SOUTH CAROLINA' },
-    { fips: '46', state: 'SOUTH DAKOTA' },
-    { fips: '47', state: 'TENNESSEE' },
-    { fips: '48', state: 'TEXAS' },
-    { fips: '49', state: 'UTAH' },
-    { fips: '50', state: 'VERMONT' },
-    { fips: '51', state: 'VIRGINIA' },
-    { fips: '53', state: 'WASHINGTON' },
-    { fips: '54', state: 'WEST VIRGINIA' },
-    { fips: '55', state: 'WISCONSIN' },
-    { fips: '56', state: 'WYOMING' }
-];
+		const states = [
+			{ fips: '01', state: 'ALABAMA' },
+			{ fips: '04', state: 'ARIZONA' },
+			{ fips: '05', state: 'ARKANSAS' },
+			{ fips: '06', state: 'CALIFORNIA' },
+			{ fips: '08', state: 'COLORADO' },
+			{ fips: '09', state: 'CONNECTICUT' },
+			{ fips: '10', state: 'DELAWARE' },
+			{ fips: '12', state: 'FLORIDA' },
+			{ fips: '13', state: 'GEORGIA' },
+			{ fips: '15', state: 'HAWAII' },
+			{ fips: '16', state: 'IDAHO' },
+			{ fips: '17', state: 'ILLINOIS' },
+			{ fips: '18', state: 'INDIANA' },
+			{ fips: '19', state: 'IOWA' },
+			{ fips: '20', state: 'KANSAS' },
+			{ fips: '21', state: 'KENTUCKY' },
+			{ fips: '22', state: 'LOUISIANA' },
+			{ fips: '23', state: 'MAINE' },
+			{ fips: '24', state: 'MARYLAND' },
+			{ fips: '25', state: 'MASSACHUSETTS' },
+			{ fips: '26', state: 'MICHIGAN' },
+			{ fips: '27', state: 'MINNESOTA' },
+			{ fips: '28', state: 'MISSISSIPPI' },
+			{ fips: '29', state: 'MISSOURI' },
+			{ fips: '30', state: 'MONTANA' },
+			{ fips: '31', state: 'NEBRASKA' },
+			{ fips: '32', state: 'NEVADA' },
+			{ fips: '33', state: 'NEW HAMPSHIRE' },
+			{ fips: '34', state: 'NEW JERSEY' },
+			{ fips: '35', state: 'NEW MEXICO' },
+			{ fips: '36', state: 'NEW YORK' },
+			{ fips: '37', state: 'NORTH CAROLINA' },
+			{ fips: '38', state: 'NORTH DAKOTA' },
+			{ fips: '39', state: 'OHIO' },
+			{ fips: '40', state: 'OKLAHOMA' },
+			{ fips: '41', state: 'OREGON' },
+			{ fips: '42', state: 'PENNSYLVANIA' },
+			{ fips: '44', state: 'RHODE ISLAND' },
+			{ fips: '45', state: 'SOUTH CAROLINA' },
+			{ fips: '46', state: 'SOUTH DAKOTA' },
+			{ fips: '47', state: 'TENNESSEE' },
+			{ fips: '48', state: 'TEXAS' },
+			{ fips: '49', state: 'UTAH' },
+			{ fips: '50', state: 'VERMONT' },
+			{ fips: '51', state: 'VIRGINIA' },
+			{ fips: '53', state: 'WASHINGTON' },
+			{ fips: '54', state: 'WEST VIRGINIA' },
+			{ fips: '55', state: 'WISCONSIN' },
+			{ fips: '56', state: 'WYOMING' }
+		];
 
-//document.getElementById('tempForm').addEventListener('submit', function (event) {
+		//document.getElementById('tempForm').addEventListener('submit', function (event) {
 
-//});
+		//});
 
 
-function getCurrentIndex(currentFips) {
-    return states.findIndex(state => state.fips === currentFips);
-}
+		function getCurrentIndex(currentFips) {
+			return states.findIndex(state => state.fips === currentFips);
+		}
 
-function navigationLinks() {
-	//
-	let currentFips;
-	window.onload = function() {
-        currentFips = window.location.href;
-		console.log(currentFips);
-    }
-	//
-    const currentStateIndex = getCurrentIndex(currentFips);
+		function navigationLinks() {
 
-    const prevState = currentStateIndex > 0 ? states[currentStateIndex - 1] : false;  // or null
-    const nextState = currentStateIndex < states.length - 1 ? states[currentStateIndex + 1] : false;
+			const url = String(window.location.href)
+			const currentFips = url.slice(url.length - 2)
+			const currentStateIndex = getCurrentIndex(currentFips);
+			const previousButton = document.getElementById('prev');
+			const nextButton = document.getElementById('next');
+			console.log(currentStateIndex)
 
-    const previousButton = document.getElementById('prev');
-    if (prevState) {
-        previousButton.href = `/fips/${prevState.fips}`;
-    } else {
-        previousButton.style.display = 'none';
-    }
-    const nextButton = document.getElementById('next');
-    if (nextState) {
-        nextButton.href = `/fips/${nextState.fips}`;
-    } else {
-        nextButton.style.display = 'none';
-    }
+			const prevState = currentStateIndex > 0 ? states[currentStateIndex - 1] : false;  // or null
+			console.log(prevState)
+			const nextState = currentStateIndex < states.length - 1 ? states[currentStateIndex + 1] : false;
 
-    
-}
+			previousButton.href = `/fips/${prevState.fips}`
+
+		}
 		// chart
 		let data = [$$DATA$$]
 		let minTemp = data[0].y
 		let maxTemp = data[0].y
 		data.forEach(object => {
-			if(object.y >= maxTemp) {
+			if (object.y >= maxTemp) {
 				maxTemp = object.y
-			if (object.y <= minTemp){
-				minTemp = object.y
-			}
+				if (object.y <= minTemp) {
+					minTemp = object.y
+				}
 			}
 		});
 		console.log(minTemp)
@@ -180,12 +167,12 @@ function navigationLinks() {
 				legend: { display: false },
 				scales: {
 					xAxes: [{ ticks: { min: 1880, max: 2020 } }],
-					yAxes: [{ ticks: { min: Math.round(minTemp)-1, max: Math.round(maxTemp)+1	} }],
+					yAxes: [{ ticks: { min: Math.round(minTemp) - 1, max: Math.round(maxTemp) + 1 } }],
 				}
 			}
 		});
 	</script>
-	
+
 </body>
 
 </html>
