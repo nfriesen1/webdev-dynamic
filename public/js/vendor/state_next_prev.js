@@ -1,5 +1,3 @@
-//const state_next_prev = document.getElementById("state_next_prev")
-
 const states = [
     { fips: '01', state: 'ALABAMA' },
     { fips: '04', state: 'ARIZONA' },
@@ -10,7 +8,6 @@ const states = [
     { fips: '10', state: 'DELAWARE' },
     { fips: '12', state: 'FLORIDA' },
     { fips: '13', state: 'GEORGIA' },
-    { fips: '15', state: 'HAWAII' },
     { fips: '16', state: 'IDAHO' },
     { fips: '17', state: 'ILLINOIS' },
     { fips: '18', state: 'INDIANA' },
@@ -52,94 +49,48 @@ const states = [
     { fips: '56', state: 'WYOMING' }
 ];
 
-//document.getElementById('tempForm').addEventListener('submit', function (event) {
-
-//});
-
 function getCurrentIndex(currentFips) {
-    return states.findIndex(state => state.fips === currentFips);
-}
+    return states.findIndex((state) => state.fips === currentFips);
+  }
 
-function navigationLinks(currentFips) {
-    const currentStateIndex = getCurrentIndex(currentFips);
-
-    const prevState = currentStateIndex > 0 ? states[currentStateIndex - 1] : null;
-    const nextState = currentStateIndex < states.length - 1 ? states[currentStateIndex + 1] : null;
-
-    const previousButton = document.getElementById('prev');
-    if (prevState) {
-        prev.href = `http://localhost:8080/fips/${prevState.fips}`;
-    } else {
-        prev.style.display = 'none';
+  const previousButton = document.getElementById("prev");
+  const nextButton = document.getElementById("next");
+  
+  function updateStateData(stateIndex) {
+    // Update your data and UI here based on the stateIndex.
+    // For example, you can update the chart or table.
+    if (stateIndex >= 0 && stateIndex < states.length) {
+        const newStateFips = states[stateIndex].fips;
+        window.location.href = `/fips/${newStateFips}`;
+      }
+  }
+  
+    const url = String(window.location.href);
+    const currentFips = url.slice(url.length - 2);
+    let currentStateIndex = getCurrentIndex(currentFips);
+    if (currentStateIndex == states.length-1) {
+        nextButton.style.visibility = 'hidden';
+    } else if (currentStateIndex == 0) {
+        previousButton.style.visibility = 'hidden';
     }
-    const nextButton = document.getElementById('next');
-    if (nextState) {
-        next.href = `http://localhost:8080/fips/${nextState.fips}`;
-    } else {
-        next.style.display = 'none';
+  
+    // Function to update data and UI
+    function updateDataAndUI() {
+      updateStateData(currentStateIndex);
     }
-
-    window.onload = function() {
-        const currentFips = window.location.href;
-        navigationLinks(currentFips);
-    }
-}
-/*
-let i = 0;
-
-function next() {
-    if (i >= states.length - 1) {
-        return false;
-    }
-    i++;
-    //stateTag.setAttribute('src', states[i]);
-}
-function prev() {
-    if (i <= 0) {
-        return false;
-    }
-    i--;
-    //stateTag.setAttribute('src', states[i]);
-}
-
-
-//let text = "";
-
-//states.forEach((state) => {
-    //text+=`<li><a href="/fips/${state.fips}">${state.state}</a></li>`
-    //prev+=`<li><a href="/fips/${state[index+1].fips}">${state.state}</a></li>`
-//})
-
-/*
-let currentIndex = 0;
-
-function updateList() {
-    state_next_prev.innerHTML = '';
-    //const state = states[currentIndex];
-}
-
-function nextState() {
-    if (states.fips < states.length - 1) {
-        states.fips++;
-        updateList();
-    }
-}
-
-function prevState() {
-    if (states.fips > 0) {
-        states.fips--;
-        updateList();
-    }
-}
-
-const nextButton = document.getElementById("nextButton");
-nextButton.textContent = "Next";
-nextButton.addEventListener("click", nextState);
-
-const prevButton = document.getElementById("prevButton");
-prevButton.textContent = "Previous";
-prevButton.addEventListener("click", prevState);
-
-updateList();
-*/
-//state_next_prev.innerHTML += text;
+  
+  
+    // Add event listeners to the buttons
+    previousButton.addEventListener("click", () => {
+      if (currentStateIndex > 0) {
+        currentStateIndex--;
+        updateDataAndUI();
+      }
+    });
+  
+    nextButton.addEventListener("click", () => {
+      if (currentStateIndex < states.length - 1) {
+        currentStateIndex++;
+        updateDataAndUI();
+      }
+    });

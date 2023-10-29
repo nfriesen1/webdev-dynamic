@@ -10,7 +10,6 @@ const states = [
     { fips: '10', state: 'DELAWARE' },
     { fips: '12', state: 'FLORIDA' },
     { fips: '13', state: 'GEORGIA' },
-    { fips: '15', state: 'HAWAII' },
     { fips: '16', state: 'IDAHO' },
     { fips: '17', state: 'ILLINOIS' },
     { fips: '18', state: 'INDIANA' },
