@@ -27,3 +27,7 @@ img {
     font-weight: bold;
 }
 
+#prev-button, #next-button{
+    margin-left: 2%;
+}
+
