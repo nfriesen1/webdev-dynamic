@@ -57,8 +57,6 @@ function getCurrentIndex(currentFips) {
   const nextButton = document.getElementById("next");
   
   function updateStateData(stateIndex) {
-    // Update your data and UI here based on the stateIndex.
-    // For example, you can update the chart or table.
     if (stateIndex >= 0 && stateIndex < states.length) {
         const newStateFips = states[stateIndex].fips;
         window.location.href = `/fips/${newStateFips}`;

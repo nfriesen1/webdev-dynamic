@@ -24,23 +24,40 @@
 		</div>
 	  </div>
 	<h1>Average State Temperatures In $$YEAR$$</h1>
-	<table>
-		<thead>
-			<tr>
-				<th>
-					State
-				</th>
-				<th>
-					Avg. Temp. F
-				</th>
-				<th>
-					Avg. Temp. C
-				</th>
-			</tr>
-		</thead>
-		<tbody>
-			$$TABLE_BODY$$
-		</tbody>
-	</table>
+		<div class="grid-x grid-margin-x">
+			<div class="large-1">
+				<br/>
+			</div>
+			<div class="large-1">
+				<button class="hollow button" id="prev">Previous</button>
+			</div>
+			<div class="large-8">
+				<table>
+					<thead>
+						<tr>
+							<th>
+								State
+							</th>
+							<th>
+								Avg. Temp. F
+							</th>
+							<th>
+								Avg. Temp. C
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						$$TABLE_BODY$$
+					</tbody>
+				</table>
+			</div>
+			<div class="large-1">
+				<br/>
+			</div>
+			<div class="large-1">
+				<button class="hollow button" id="next">Next</button>
+			</div>
+		</div>
+	<script src="../js/vendor/year_next_prev.js"></script>
 </body>
 </html>
