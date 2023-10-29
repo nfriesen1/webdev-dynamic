@@ -6,18 +6,16 @@ let currentTemp1 = url.slice(url.length-5, url.length-3)
 let currentTemp2 = url.slice(url.length-2)
 console.log(currentTemp1, currentTemp2)
 
-if (currentTemp2 == 74) {
+if (currentTemp2 >= 74) {
     nextButton.style.visibility = 'hidden';
-} else if (currentTemp1== 34) {
+} else if (currentTemp1<= 34) {
     previousButton.style.visibility = 'hidden';
 }
 
 function updateTempRange(currentTemp1, currentTemp2) {
     // Update your data and UI here based on the stateIndex.
     // For example, you can update the chart or table.
-    if (currentTemp1 >= 34 && currentTemp2 < 75) {
-        window.location.href = `/temp/${currentTemp1}/${currentTemp2}`;
-      }
+    window.location.href = `/temp/${currentTemp1}/${currentTemp2}`;
   }
 
 // Function to update data and UI
