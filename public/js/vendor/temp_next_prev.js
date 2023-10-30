@@ -1,5 +1,9 @@
-const previousButton = document.getElementById("prev")
-const nextButton = document.getElementById("next")
+const previousMaxButton = document.getElementById("prev_max")
+const nextMaxButton = document.getElementById("next_max")
+const previousMinButton = document.getElementById("prev_min")
+const nextMinButton = document.getElementById("next_min")
+
+
 
 const url = String(window.location.href);
 let currentTemp1 = url.slice(url.length-5, url.length-3)
@@ -7,9 +11,9 @@ let currentTemp2 = url.slice(url.length-2)
 console.log(currentTemp1, currentTemp2)
 
 if (currentTemp2 >= 74) {
-    nextButton.style.visibility = 'hidden';
+    nextMaxButton.style.visibility = 'hidden';
 } else if (currentTemp1<= 34) {
-    previousButton.style.visibility = 'hidden';
+    previousMinButton.style.visibility = 'hidden';
 }
 
 function updateTempRange(currentTemp1, currentTemp2) {
@@ -25,17 +29,29 @@ function updateDataAndUI() {
 
 
 // Add event listeners to the buttons
-previousButton.addEventListener("click", () => {
+previousMinButton.addEventListener("click", () => {
   if (currentTemp1 > 34) {
     currentTemp1--;
+    updateDataAndUI();
+  }
+});
+
+nextMaxButton.addEventListener("click", () => {
+  if (currentTemp2 < 74) {
+    currentTemp2++;
+    updateDataAndUI();
+  }
+});
+
+previousMaxButton.addEventListener("click", () => {
+  if (currentTemp2 >= 35) {
     currentTemp2--;
     updateDataAndUI();
   }
 });
 
-nextButton.addEventListener("click", () => {
-  if (currentTemp2 < 74) {
-    currentTemp2++;
+nextMinButton.addEventListener("click", () => {
+  if (currentTemp1 <= 73) {
     currentTemp1++;
     updateDataAndUI();
   }

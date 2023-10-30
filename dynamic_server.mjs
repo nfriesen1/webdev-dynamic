@@ -90,33 +90,44 @@ app.get('/year/:year', (req,res) => {
             res.status(404).type('text').send("Error: No data for year " + year)
         })
 })
-
-app.get('/temp/:temp1/:temp2', (req,res) => {
+app.get('/temp/:temp1/:temp2', (req, res) => {
     let temp1 = req.params.temp1;
-    let temp2 = req.params.temp2
-    let temp_query = "select * from Climate where temp >=? OR temp <=?"
-    let p1 = dbSelect(temp_query, [temp1, temp2]);
-    let p2 = fs.promises.readFile(path.join(template,'temp_template.html'), 'utf-8')
-    Promise.all([p1, p2]).then((results) => {
-        let response = results[1].replace('$$TEMP1$$', temp1)
-        response = response.replace('$$TEMP2$$', temp2)
-        let table_body = '';
-        results[0].forEach((object) => {
-            let table_row = '<tr>';
-            if(object.temp >= temp1 && object.temp <= temp2) {
-                table_row += '<td>' + object.year + '</td>';
-                table_row += '<td>' + us.lookup(object.fips).name + '</td>';
+    let temp2 = req.params.temp2;
+    let temp_query = "select * from Climate where temp >= ? AND temp <= ?";
+
+    dbSelect(temp_query, [temp1, temp2])
+        .then((results) => {
+            if (results.length === 0) {
+                res.status(404).type('text').send("Error: No data for temperature between " + temp1 + " and " + temp2);
+                return;
             }
-            
-            table_body += table_row;
-            });
-        response = response.replace('$$TABLE_BODY$$', table_body)
-        res.status(200).type('html').send(response)
-        }).catch((error) => {
-            console.error('Error: ' , error)
-            res.status(404).type('text').send("Error: No data for temperature between " + temp1 + " " + temp2)
+
+            let p2 = fs.promises.readFile(path.join(template, 'temp_template.html'), 'utf-8');
+            return Promise.all([results, p2]);
         })
-})
+        .then((results) => {
+            let response = results[1].replace('$$TEMP1$$', temp1);
+            response = response.replace('$$TEMP2$$', temp2);
+            let table_body = '';
+            results[0].forEach((object) => {
+                let table_row = '<tr>';
+                if (object.temp >= temp1 && object.temp <= temp2) {
+                    table_row += '<td>' + object.year + '</td>';
+                    table_row += '<td>' + us.lookup(object.fips).name + '</td>';
+                }
+                table_row += '</tr>';
+                table_body += table_row;
+            });
+            response = response.replace('$$TABLE_BODY$$', table_body);
+            res.status(200).type('html').send(response);
+        })
+        .catch((error) => {
+            console.error('Error: ', error);
+            res.status(404).type('text').send("Error: No data for temperature between " + temp1 + " and " + temp2);
+        });
+});
+
+
 
 
 
