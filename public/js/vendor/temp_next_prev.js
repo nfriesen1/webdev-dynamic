@@ -16,6 +16,11 @@ if (currentTemp2 >= 74) {
     previousMinButton.style.visibility = 'hidden';
 }
 
+if (currentTemp1 == currentTemp2) {
+  previousMaxButton.style.visibility = 'hidden'
+  nextMinButton.style.visibility = 'hidden'
+}
+
 function updateTempRange(currentTemp1, currentTemp2) {
     // Update your data and UI here based on the stateIndex.
     // For example, you can update the chart or table.
@@ -30,28 +35,28 @@ function updateDataAndUI() {
 
 // Add event listeners to the buttons
 previousMinButton.addEventListener("click", () => {
-  if (currentTemp1 > 34) {
+  if (currentTemp1 > 34 && currentTemp2 >= currentTemp1) {
     currentTemp1--;
     updateDataAndUI();
   }
 });
 
 nextMaxButton.addEventListener("click", () => {
-  if (currentTemp2 < 74) {
+  if (currentTemp2 < 74 && currentTemp1 < currentTemp2 + 1) {
     currentTemp2++;
     updateDataAndUI();
   }
 });
 
 previousMaxButton.addEventListener("click", () => {
-  if (currentTemp2 >= 35) {
+  if (currentTemp2 >= 35 && currentTemp2 >= currentTemp1) {
     currentTemp2--;
     updateDataAndUI();
   }
 });
 
 nextMinButton.addEventListener("click", () => {
-  if (currentTemp1 <= 73) {
+  if (currentTemp1 <= 73 && currentTemp1  < currentTemp2) {
     currentTemp1++;
     updateDataAndUI();
   }
