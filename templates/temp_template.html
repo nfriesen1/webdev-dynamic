@@ -26,11 +26,23 @@
 	<h1>Years and States with Average Temperatures Between $$TEMP1$$°F and $$TEMP2$$°F
     </h1>
 	<div class="grid-x grid-margin-x">
-		<div class="small-12 large-1" id="prev-button" style="margin-left: 2% ;">
-			<button class="hollow button" id="prev_min">Previous Min Temp</button>
-			<button class="hollow button" id="next_min">Next Min Temp </button>
+		<div class="small-12 large-1" id="prev-button"  style="margin-left: 2%;">
+			<div class="hide-for-small-only">
+				<button class="hollow button" id="prev_min">Previous Min Temp</button>
+				<button class="hollow button" id="next_min">Next Min Temp </button>
+			</div>
 		</div>
 		<div class="small-12 large-10" style="margin: 0.5%;">
+			<div class="show-for-small-only" style="margin-left: 10%;">
+				<div>
+					<button class="hollow button" id="prev_min_small">Previous Min Temp</button>
+					<button class="hollow button" id="next_min_small">Next Min Temp </button>
+				</div>
+				<div>
+					<button class="hollow button" id="prev_max_small">Previous Max Temp</button>
+					<button class="hollow button" id="next_max_small">Next Max Temp</button>
+				</div>
+			</div>
 			<table>
 				<thead>
 					<tr>
@@ -48,8 +60,10 @@
 			</table>
 		</div>
 		<div class="small-12 large-1" id="next-button">
-			<button class="hollow button" id="prev_max">Previous Max Temp</button>
-			<button class="hollow button" id="next_max">Next Max Temp</button>
+			<div class="hide-for-small-only">
+				<button class="hollow button" id="prev_max">Previous Max Temp</button>
+				<button class="hollow button" id="next_max">Next Max Temp</button>
+			</div>
 		</div>
 	</div>
 	<script src="../../js/vendor/temp_next_prev.js"></script>

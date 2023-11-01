@@ -3,7 +3,7 @@ body {
 }
 
 table, th, td {
-    border: 1px solid black;
+    border: 2px solid black;
 }
 
 h1, p, img, .temp_form {
@@ -18,6 +18,10 @@ img {
     width: 75%;
 }
 
+#home_text {
+    margin-left: 1%;
+}
+
 #temp_template_body {
     background-color: aliceblue;
 }
@@ -27,7 +31,7 @@ img {
     font-weight: bold;
 }
 
-#prev_min, #next_min{
+#prev_min, #next_min, #prev_max, #next_max, #prev, #next{
     margin-left: 2%;
 }
 

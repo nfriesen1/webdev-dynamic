@@ -3,6 +3,11 @@ const nextMaxButton = document.getElementById("next_max")
 const previousMinButton = document.getElementById("prev_min")
 const nextMinButton = document.getElementById("next_min")
 
+const previousMaxButtonSmall = document.getElementById("prev_max_small")
+const nextMaxButtonSmall = document.getElementById("next_max_small")
+const previousMinButtonSmall = document.getElementById("prev_min_small")
+const nextMinButtonSmall = document.getElementById("next_min_small")
+
 
 
 const url = String(window.location.href);
@@ -56,6 +61,34 @@ previousMaxButton.addEventListener("click", () => {
 });
 
 nextMinButton.addEventListener("click", () => {
+  if (currentTemp1 <= 73 && currentTemp1  < currentTemp2) {
+    currentTemp1++;
+    updateDataAndUI();
+  }
+});
+
+previousMinButtonSmall.addEventListener("click", () => {
+  if (currentTemp1 > 34 && currentTemp2 >= currentTemp1) {
+    currentTemp1--;
+    updateDataAndUI();
+  }
+});
+
+nextMaxButtonSmall.addEventListener("click", () => {
+  if (currentTemp2 < 74 && currentTemp1 < currentTemp2 + 1) {
+    currentTemp2++;
+    updateDataAndUI();
+  }
+});
+
+previousMaxButtonSmall.addEventListener("click", () => {
+  if (currentTemp2 >= 35 && currentTemp2 >= currentTemp1) {
+    currentTemp2--;
+    updateDataAndUI();
+  }
+});
+
+nextMinButtonSmall.addEventListener("click", () => {
   if (currentTemp1 <= 73 && currentTemp1  < currentTemp2) {
     currentTemp1++;
     updateDataAndUI();
