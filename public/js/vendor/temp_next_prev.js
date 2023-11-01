@@ -11,14 +11,23 @@ const nextMinButtonSmall = document.getElementById("next_min_small")
 
 
 const url = String(window.location.href);
-let currentTemp1 = url.slice(url.length-5, url.length-3)
-let currentTemp2 = url.slice(url.length-2)
+var parts = url.split("/");
+console.log(parts)
+let currentTemp1 = parts[4]
+let currentTemp2 = parts[5]
 console.log(currentTemp1, currentTemp2)
 
 if (currentTemp2 >= 74) {
+  console.log(currentTemp2)
+  nextMaxButtonSmall.style.visibility = 'hidden';
+
+} else if(currentTemp1<= 34) {
+  previousMinButtonSmall.style.visibility = 'hidden'; 
+}
+if (currentTemp2 >= 74) {
     nextMaxButton.style.visibility = 'hidden';
 } else if (currentTemp1<= 34) {
-    previousMinButton.style.visibility = 'hidden';
+    previousMinButton.style.visibility = 'hidden'; 
 }
 
 if (currentTemp1 == currentTemp2) {

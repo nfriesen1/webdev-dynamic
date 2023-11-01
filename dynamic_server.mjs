@@ -111,10 +111,8 @@ app.get('/temp/:temp1/:temp2', (req, res) => {
             let table_body = '';
             results[0].forEach((object) => {
                 let table_row = '<tr>';
-                if (object.temp >= temp1 && object.temp <= temp2) {
-                    table_row += '<td>' + object.year + '</td>';
-                    table_row += '<td>' + us.lookup(object.fips).name + '</td>';
-                }
+                table_row += '<td>' + object.year + '</td>';
+                table_row += '<td>' + us.lookup(object.fips).name + '</td>';
                 table_row += '</tr>';
                 table_body += table_row;
             });
