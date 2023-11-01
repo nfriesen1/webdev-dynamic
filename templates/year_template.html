@@ -18,17 +18,23 @@
 			  <a href="../../index.html">Home</a>
 			</li>
 			<li><a href="/fips.html">States</a></li>
-			<li><a href="/years.html">Years</a></li>
+			<li><b><a href="/years.html">Years</a></b></li>
 			<li><a href="/temp.html">Temps</a></li>
 		  </ul>
 		</div>
 	  </div>
-	<h1>Average State Temperatures In $$YEAR$$</h1>
+	
 		<div class="grid-x grid-margin-x">
 			<div class="small-12 large-1" id="prev-button" style="margin-left: 2%;">
 				<button class="hollow button" id="prev">Previous</button>
 			</div>
-			<div class="small-12 large-10" style="margin: 0.5%;">
+			<h1 class="small-12 large-10">Average State Temperatures In $$YEAR$$</h1>
+			<div class="small-12 large-1" id="next-button" style="margin-left: 1%;">
+				<button class="hollow button" id="next">Next</button>
+			</div>
+		</div>
+		<div class="grid-x grid-margin-x">
+			<div class="small-12 large-12" style="margin: 0.5%;">
 				<table>
 					<thead>
 						<tr>
@@ -48,9 +54,7 @@
 					</tbody>
 				</table>
 			</div>
-			<div class="small-12 large-1" id="next-button" style="margin-left: 1%;">
-				<button class="hollow button" id="next">Next</button>
-			</div>
+			
 		</div>
 	<script src="../js/vendor/year_next_prev.js"></script>
 </body>

@@ -6,6 +6,14 @@ table, th, td {
     border: 2px solid black;
 }
 
+b {
+    font-weight: bold;
+}
+
+c {
+    text-align: center;
+}
+
 h1, p, img, .temp_form {
     text-align: center;
     margin: 1%;
